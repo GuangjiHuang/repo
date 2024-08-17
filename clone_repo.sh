@@ -6,8 +6,8 @@ if [ ! -d $target_dir ]; then
 	mkdir -p $target_dir
 fi
 
-ssh_prefix="http://github.com/GuangjiHuang"
-http_prefix="git@github.com:GuangjiHuang"
+http_prefix="http://github.com/GuangjiHuang"
+ssh_prefix="git@github.com:GuangjiHuang"
 
 http_projects=(
 	"shell-vim-cfg"
@@ -45,7 +45,7 @@ do
 	fi
 
 	project_url=$prefix/$project
-	git clone $project_url $target_path >dev/null 2>&1
+	git clone $project_url $target_path >/dev/null 2>&1
 
 	if [ $? -eq 0 ]; then
 		echo "----------$project: clone success! ----------"
