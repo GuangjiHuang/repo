@@ -1,5 +1,13 @@
 #! /bin/bash
 
+# designed not:
+# clone ssh/http
+# go project
+# list project
+# push project
+# pull project
+# tar project
+
 target_dir=$HOME/mygithub
 
 if [ ! -d $target_dir ]; then
