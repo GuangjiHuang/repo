@@ -139,6 +139,25 @@ yhrepo()
 			done
 		;;
 		"list")
+			echo "private git repo:"
+			sign='-'
+			for private_repo in ${git_private_projects[@]}; do
+				if [ -d $target_dir/$private_repo ]; then
+					sign='+'
+				else
+					sign='-'
+				fi
+				echo -e "($sign) $private_repo"
+			done
+			echo "public git repo:"
+			for public_repo in ${git_public_projects[@]}; do
+				if [ -d $target_dir/$private_repo ]; then
+					sign='+'
+				else
+					sign='-'
+				fi
+				echo -e "($sign) $public_repo"
+			done
 			;;
 		*)
 			echo "Not the right args: ${args[0]}"
