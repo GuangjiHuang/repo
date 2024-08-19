@@ -47,7 +47,7 @@ is_in_array()
 	return 1
 }
 
-yhrepo()
+yh()
 {
 
 	# arg1 is the operation: clone, push, pull, list, go, tar
@@ -64,12 +64,12 @@ yhrepo()
 		"clone" | "push" | "pull" | "go" | "tar")
 			if [[ ${args[-1]} == "http" ]]; then
 				echo "----------using http to clone the git repo----------"
-				prefix=$git_http_prefix
-				check_projects=("${git_public_projects[@]}")
+				local prefix=$git_http_prefix
+				local check_projects=("${git_public_projects[@]}")
 			else
 				echo "----------using ssh to clone the git repo----------"
-				prefix=$git_ssh_prefix
-				check_projects=("${git_projects[@]}")
+				local prefix=$git_ssh_prefix
+				local check_projects=("${git_projects[@]}")
 			fi
 			select_projects=(${args[@]:1:${args_num}})
 			final_projects=()
