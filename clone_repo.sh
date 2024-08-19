@@ -132,7 +132,7 @@ yh()
 					if [ $? -eq 0 ]; then
 						print_info ">>>>>>>> git push: $project success!"
 					else
-						print_info ">>>>>>>> git push: $project fail!"
+						print_error ">>>>>>>> git push: $project fail!"
 					fi
 					cd - >/dev/null
 
@@ -147,7 +147,7 @@ yh()
 					if [ $? -eq 0 ]; then
 						print_info ">>>>>>>> git pull: $project success!"
 					else
-						print_info ">>>>>>>> git pull: $project fail!"
+						print_error ">>>>>>>> git pull: $project fail!"
 					fi
 					cd - >/dev/null
 
