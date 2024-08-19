@@ -107,17 +107,17 @@ yhrepo()
 						echo "----------$project: clone fail! ----------"
 					fi
 				elif [[ ${args[0]} == "push" ]]; then
-					echo "git push: $project"
+					echo ">>>>>>>> git push: $project start ..."
 					if [ ! -d $target_path ]; then
 						echo "$target_path not exists! No such project, please download first!"
-						echo "----------$project: push fail! ----------"
+						echo ">>>>>>>> git push: $project fail!"
 					fi
 					commit_message="update, user($(whoami)), host($(hostname)), date($(date))"
 					echo $commit_message
 					cd $target_path
 					git add . && git commit -m "${commit_message}" && git push
 					cd -
-					echo "----------$project: push success! ----------"
+					echo ">>>>>>>> git push: $project success!"
 
 				elif [[ ${args[0]} == "pull" ]]; then
 					echo "git pull: $project"
