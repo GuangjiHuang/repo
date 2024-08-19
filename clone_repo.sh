@@ -109,15 +109,16 @@ yh()
 				project_url=$prefix/$project
 
 				if [[ ${args[0]} == "clone" ]]; then
+					print_info ">>>>>>>> git clone: $project start ..."
 					if [[ -d $target_path ]]; then
 						rm -rf $target_path
 					fi
 					#git clone $project_url $target_path >/dev/null 2>&1
 					git clone $project_url $target_path
 					if [ $? -eq 0 ]; then
-						print_error "----------$project: clone success! ----------"
+						print_info ">>>>>>>> git clone: $project success!"
 					else
-						print_info "----------$project: clone fail! ----------"
+						print_error ">>>>>>>> git clone: $project fail!"
 					fi
 				elif [[ ${args[0]} == "push" ]]; then
 					print_info ">>>>>>>> git push: $project start ..."
@@ -128,11 +129,27 @@ yh()
 					local commit_message="update, user($(whoami)), host($(hostname)), date($(date))"
 					cd $target_path
 					git add . && git commit -m "${commit_message}" && git push
-					cd -
-					print_info ">>>>>>>> git push: $project success!"
+					if [ $? -eq 0 ]; then
+						print_info ">>>>>>>> git push: $project success!"
+					else
+						print_info ">>>>>>>> git push: $project fail!"
+					fi
+					cd - >/dev/null
 
 				elif [[ ${args[0]} == "pull" ]]; then
-					print_info "git pull: $project"
+					print_info ">>>>>>>> git pull: $project start ..."
+					if [ ! -d $target_path ]; then
+						print_error "$target_path not exists! No such project, please download first!"
+						print_error ">>>>>>>> git pull: $project fail!"
+					fi
+					cd $target_path
+					git pull
+					if [ $? -eq 0 ]; then
+						print_info ">>>>>>>> git pull: $project success!"
+					else
+						print_info ">>>>>>>> git pull: $project fail!"
+					fi
+					cd - >/dev/null
 
 				elif [[ ${args[0]} == "go" ]]; then
 					if [ $init_final_projects_num -eq 0 ]; then
