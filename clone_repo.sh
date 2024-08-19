@@ -108,7 +108,7 @@ yhrepo()
 					fi
 				elif [[ ${args[0]} == "push" ]]; then
 					echo "git push: $project"
-					if [ -d $target_path ]; then
+					if [ ! -d $target_path ]; then
 						echo "$target_path not exists! No such project, please download first!"
 						echo "----------$project: push fail! ----------"
 					fi
