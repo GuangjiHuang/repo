@@ -161,7 +161,7 @@ yh()
 					cp -r $target_dir/$project $tar_top_dir
 					if [[ $project == ${final_projects[$final_projects_num]} ]]; then
 						print_info "tar the $tar_top_dir"
-						tar -f mygithub_tar.tar -c $tar_top_dir
+						tar -f mygithub_tar.tar -c $(basename $tar_top_dir)
 					fi
 				else
 					print_error "No such operation!"
