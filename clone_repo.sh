@@ -75,7 +75,7 @@ yh()
 	local args_num=${#args[@]}
 
 	case ${args[0]} in
-		"clone" | "push" | "pull" | "go" | "tar")
+		"clone" | "push" | "pull" | "go" | "tar" | "install" | "uninstall")
 			if [[ ${args[-1]} == "http" ]]; then
 				local prefix=$git_http_prefix
 				local check_projects=("${git_public_projects[@]}")
@@ -180,6 +180,21 @@ yh()
 						print_info "tar the $tar_top_dir"
 						tar -f mygithub_tar.tar -c $(basename $tar_top_dir)
 					fi
+
+				elif [[ "${args[0]}" == "install" ]] || [[ "${args[0]}" == "uninstall" ]]; then
+					print_info ">>>>>>>> try to ${args[0]} the $project ..."
+					if [ -d $target_path ]; then
+						cd $target_path
+						if [ -f ${args[0]}*.sh ]; then
+							./${args[0]}*.sh
+						else
+							print_error "not found the ${args[0]}* shell script!"
+						fi
+					else
+						print_error "$target_path no exists! So no need to ${args[0]}* anything!"
+					fi
+					echo
+
 				else
 					print_error "No such operation!"
 				fi
@@ -214,8 +229,16 @@ yh()
 				print_error "repo: $target_dir/repo not exists!"
 			fi
 			;;
+		"yh")
+			local yh_file_path=$target_dir/repo/clone_repo.sh
+			if [ -f $yh_file_path ]; then
+				vim $yh_file_path
+			else
+				print_error "$yh_file_path no exits!"
+			fi
+			;;
 		"help")
-			print_help "clone/push/pull/tar:" "shell-vim-cfg shell-script [other project] [http]/[ssh]"
+			print_help "clone/push/pull/tar/install/uninstall:" "shell-vim-cfg shell-script [other project] [http]/[ssh]"
 			print_help "list:" "show all the possible repo, + means the exist in your local, - means not exists!"
 			print_help "source:" "source ~/mygithub/repo/clone_*.sh, update the funcion you use(yh)"
 			print_help "help:" "show the help information"
