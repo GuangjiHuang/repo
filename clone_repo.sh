@@ -128,6 +128,7 @@ yh()
 					fi
 					local commit_message="update, user($(whoami)), host($(hostname)), date($(date))"
 					cd $target_path
+					git_unhook >/dev/null 2>&1
 					git add . && git commit -m "${commit_message}" && git push
 					if [ $? -eq 0 ]; then
 						print_info "<<<<<<<<  git push: $project success!"
@@ -153,7 +154,9 @@ yh()
 
 				elif [[ ${args[0]} == "go" ]]; then
 					if [ $init_final_projects_num -eq 0 ]; then
-						print_error "No scuh project: ${args[0]}"
+						#print_error "No scuh project: ${args[0]}"
+						# no arg: go to the ~/mygithub
+						cd $target_dir
 					elif [ -d $target_path ]; then
 						print_info "-> $target_path"
 						cd $target_path
