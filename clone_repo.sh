@@ -232,7 +232,7 @@ yh()
 				print_error "repo: $target_dir/repo not exists!"
 			fi
 			;;
-		"yh")
+		"yh" | "hy")
 			local yh_file_path=$target_dir/repo/clone_repo.sh
 			if [ -f $yh_file_path ]; then
 				vim $yh_file_path
@@ -251,4 +251,5 @@ yh()
 			;;
 	esac
 }
+alias hy='yh'
 
